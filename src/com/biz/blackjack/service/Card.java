@@ -1,5 +1,8 @@
 package com.biz.blackjack.service;
 
+import com.biz.blackjack.vo.NumVO;
+import com.biz.blackjack.vo.ShapeVO;
+
 public class Card {
 	
 	private Suit suit;

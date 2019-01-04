@@ -18,7 +18,7 @@ public class BlackJackExec01 {
 	Deck playerDeck = new Deck();
 	Deck dealerDeck = new Deck();
 	
-	double playerMoney = 100.00;
+	double playerMoney = 10000;
 	
 	Scanner userInput = new Scanner(System.in);
 	
@@ -26,7 +26,7 @@ public class BlackJackExec01 {
 	while(playerMoney > 0) {
 		//play on!
 		//Take the players bet
-		System.out.println("당신은 " + playerMoney + ", 이 있습니다. 얼마를 배팅하시겠습니까?");
+		System.out.println("당신은 " + playerMoney + ", 원이 있습니다. 얼마를 배팅하시겠습니까?");
 		double playerBet = userInput.nextDouble();
 		if(playerBet > playerMoney) {
 			System.out.println("가지고 있는 돈보다 더 많이 배팅할 수 없습니다. byebye");
@@ -60,7 +60,7 @@ public class BlackJackExec01 {
 			// They Hit
 			if(response == 1) {
 				playerDeck.draw(playingDeck);
-				System.out.println("you draw a : " + playerDeck.getCard(playerDeck.deckSize()-1.toString));
+				System.out.println("you draw a : " + playerDeck.getCard(playerDeck.deckSize()-1).toString());
 				// Bust if >21
 				if(playerDeck.cardsValue()>21) {
 					System.out.println("Bust. Currently calued at " + playerDeck.cardsValue());
@@ -89,6 +89,30 @@ public class BlackJackExec01 {
 			System.out.println("Dealer Draws " + dealerDeck.getCard(dealerDeck.deckSize()-1).toString());
 			
 		}
+		// Display Total Value for Dealer
+		System.out.println("Dealer's Hand is valued at " + dealerDeck.cardsValue());
+		if((dealerDeck.cardsValue() >21)&& endRound == false) {
+			System.out.println("Dealer busts! You win");
+			playerMoney += playerBet;
+			endRound = true;
+			
+		}
+		
+		// Determine if push
+		if((playerDeck.cardsValue() == dealerDeck.cardsValue()) && endRound == false){
+			System.out.println("push");
+			endRound = true;
+			
+		}
+		
+		if(playerDeck.cardsValue() > dealerDeck.cardsValue() && endRound == false ){
+			System.out.println("You win the hand!");
+			endRound = true;
+		}
+		
+		playerDeck.moveAllToDeck(playingDeck);
+		dealerDeck.moveAllToDeck(playingDeck);
+		System.out.println("End of hand.");
 	}
 	System.out.println("게임 끝! 가지고 있는 돈이 없습니다.");
 	

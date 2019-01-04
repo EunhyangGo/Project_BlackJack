@@ -41,9 +41,100 @@
 
 package com.biz.blackjack.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import com.biz.blackjack.vo.NumVO;
+import com.biz.blackjack.vo.ShapeVO;
 
 public class BlackJackService {
-	List<Card> CardList;
+	List<ShapeVO> shapeList;
+	List<NumVO> numList;
+	List<Card2> cards;
+	
+	public BlackJackService() {
+		this.shapeList = new ArrayList<ShapeVO>();
+		this.numList = new ArrayList<NumVO>();
+		this.cards = new ArrayList<Card2>();
+	}
+	
+	// 카드를 만드는 메서드
+	public void CreateCard() {
+		for(ShapeVO sv : shapeList) {
+			for(NumVO nv : numList) {
+				// 모양이 들어있는 카드와, 숫자가 들어있는 카드를 서로 섞어준다.
+				this.cards.add(new Card2(sv,nv));
+			
+			}
+		}
+	}
 
+	// 만들어진 카드를 섞어주는 메서드
+	public void shuffle() {
+		List<Card2> tmpCard = new ArrayList<Card2>();
+		Random random = new Random();
+		int randomCard = 0;
+		int originalSize = this.cards.size();
+		for(int i =0 ; i <originalSize; i++) {
+			randomCard = random.nextInt((this.cards.size()-1-0) +1) +0;
+			tmpCard.add(this.cards.get(randomCard));
+			this.cards.remove(randomCard);
+			
+		}
+		this.cards = tmpCard;
+
+	}
+	public String toString() {
+		String cardListOutPut = "";
+		for(Card2 aCard : this.cards) {
+			cardListOutPut += "\n" +aCard.toString();
+		}
+		return cardListOutPut;
+	}
+	public void removeCard(int i) {
+		this.cards.remove(i);
+		
+	}
+	public Card2 getCard(int i) {
+		return this.cards.get(i);
+	}
+	public void addCard(Card2 addCard) {
+		this.cards.add(addCard);
+	}
+	public void draw(Deck comingForm) {
+		this.cards.add(comingForm.getCard(0));
+		comingForm.removeCard(0);
+	}
+	public int deckSize() {
+		return this.cards.size();
+	}
+	public void moveAllToDeck(Deck moveTO) {
+		int thisDeckSize = this.cards.size();
+		
+		// put cards into moveTO deck
+		for(int i = 0; i < thisDeckSize; i++) {
+			moveTO.addCard(this.getCard(i));
+		}
+		for(int i = 0; i<thisDeckSize; i++) {
+			this.removeCard(0);
+		}
+	}
+	public int cardsValue() {
+		int totalValue =0;
+		int aces = 0;
+		
+		
+		NumVO vo = new NumVO();
+		for(int i =0; i< vo.getACE(); i++) {
+			if(totalValue > 10 ) {
+				totalValue += 1 ;
+			}else {
+				totalValue +=11;
+			}
+
+		}
+		return totalValue;
+	}
+	
 }

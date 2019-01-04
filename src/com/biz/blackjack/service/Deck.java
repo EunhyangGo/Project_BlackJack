@@ -66,6 +66,18 @@ public class Deck {
 	public int deckSize() {
 		return this.cards.size();
 	}
+	
+	public void moveAllToDeck(Deck moveTO) {
+		int thisDecksize = this.cards.size();
+		
+		// put cards into moveTo deck
+		for(int i = 0 ; i < thisDecksize; i++) {
+			moveTO.addCard(this.getCard(i));
+		}
+		for(int i = 0 ; i <thisDecksize; i++) {
+			this.removeCard(0);
+		}
+	}
 	// Return total value of cards in deck
 	public int cardsValue() {
 		int totalValue =0;
@@ -98,4 +110,5 @@ public class Deck {
 		}
 		return totalValue;
 	}
+	
 }
