@@ -44,6 +44,7 @@ package com.biz.blackjack.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 import com.biz.blackjack.vo.NumVO;
 import com.biz.blackjack.vo.ShapeVO;
@@ -52,11 +53,17 @@ public class BlackJackService {
 	List<ShapeVO> shapeList;
 	List<NumVO> numList;
 	List<Card2> cards;
+	String player ;
+	String dealer;
+	Scanner scan;
 	
 	public BlackJackService() {
 		this.shapeList = new ArrayList<ShapeVO>();
 		this.numList = new ArrayList<NumVO>();
 		this.cards = new ArrayList<Card2>();
+		this.player = player;
+		this.dealer = dealer;
+		scan = new Scanner(System.in);
 	}
 	
 	// 카드를 만드는 메서드
@@ -100,8 +107,10 @@ public class BlackJackService {
 		return this.cards.get(i);
 	}
 	public void addCard(Card2 addCard) {
-		this.cards.add(addCard);
+		// TODO Auto-generated method stub
+	this.cards.add(addCard);	
 	}
+	
 	public void draw(Deck comingForm) {
 		this.cards.add(comingForm.getCard(0));
 		comingForm.removeCard(0);
@@ -136,5 +145,23 @@ public class BlackJackService {
 		}
 		return totalValue;
 	}
-	
+	public void Betting() {
+		
+		int playerMoney = 10000;
+		while(playerMoney > 0) {
+			System.out.println("당신은" + playerMoney + "원이 있습니다."
+					+ "얼마를 배팅하시겠습니까?");
+			int playerBet = scan.nextInt();
+			if(playerBet > playerMoney) {
+				System.out.println("가지고 있는 돈보다 더 많이 배팅할 수 없습니다.");
+			break;
+			}
+			boolean endRound = false;
+			
+			
+		}
+		
+		
+		
+	}
 }

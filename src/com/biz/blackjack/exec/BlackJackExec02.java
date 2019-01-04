@@ -11,10 +11,13 @@ public class BlackJackExec02 {
 
 		
 		BlackJackService bs = new BlackJackService();
-		
 		bs.CreateCard();
 		bs.shuffle();
 
+		BlackJackService player = new BlackJackService();
+		BlackJackService dealer = new BlackJackService();
+		
+		
 	}
 
 }
