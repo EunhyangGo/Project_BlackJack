@@ -2,10 +2,10 @@ package com.biz.blackjack.vo;
 
 public class ShapeVO {
 
-	String CLUB;
-	String DAIMOND;
-	String SPADE;
-	String HEART;
+	private String CLUB;
+	private String DAIMOND;
+	private String SPADE;
+	private String HEART;
 	public String getCLUB() {
 		return CLUB;
 	}
@@ -30,11 +30,6 @@ public class ShapeVO {
 	public void setHEART(String hEART) {
 		HEART = hEART;
 	}
-	@Override
-	public String toString() {
-		return "ShapeVO [CLUB=" + CLUB + ", DAIMOND=" + DAIMOND + ", SPADE=" + SPADE + ", HEART=" + HEART + "]";
-	}
-	
 	
 	
 }

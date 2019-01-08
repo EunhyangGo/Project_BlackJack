@@ -2,20 +2,19 @@ package com.biz.blackjack.vo;
 
 public class NumVO {
 	
-	int TWO = 2;
-	int THREE = 3;
-	int FOUR = 4;
-	int FIVE = 5;
-	int SIX = 6;
-	int SEVEN = 7;
-	int EIGHT = 8;
-	int NINE = 9;
-	int TEN = 10;
-	int JACK = 10;
-	int KING = 10;
-	int QUEEN = 10;
-	int ACE = 0;
-	int ACE2 = 0;
+	private int TWO = 2;
+	private int THREE = 3;
+	private int FOUR = 4;
+	private int FIVE = 5;
+	private int SIX = 6;
+	private int SEVEN = 7;
+	private  int EIGHT = 8;
+	private int NINE = 9;
+	private int TEN = 10;
+	private int JACK = 10;
+	private int KING = 10;
+	private int QUEEN = 10;
+	private int ACE = 0;
 	public int getTWO() {
 		return TWO;
 	}
@@ -94,20 +93,6 @@ public class NumVO {
 	public void setACE(int aCE) {
 		ACE = aCE;
 	}
-	public int getACE2() {
-		return ACE2;
-	}
-	public void setACE2(int aCE2) {
-		ACE2 = aCE2;
-	}
-	@Override
-	public String toString() {
-		return "NumVO [TWO=" + TWO + ", THREE=" + THREE + ", FOUR=" + FOUR + ", FIVE=" + FIVE + ", SIX=" + SIX
-				+ ", SEVEN=" + SEVEN + ", EIGHT=" + EIGHT + ", NINE=" + NINE + ", TEN=" + TEN + ", JACK=" + JACK
-				+ ", KING=" + KING + ", QUEEN=" + QUEEN + ", ACE=" + ACE + ", ACE2=" + ACE2 + "]";
-	}
 
-		
 	
-
 }
