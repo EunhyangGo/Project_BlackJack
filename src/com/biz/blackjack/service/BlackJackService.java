@@ -49,20 +49,17 @@ import java.util.Scanner;
 import com.biz.blackjack.vo.NumVO;
 import com.biz.blackjack.vo.ShapeVO;
 
+
 public class BlackJackService {
 	List<ShapeVO> shapeList;
 	List<NumVO> numList;
 	List<Card2> cards;
-	String player ;
-	String dealer;
 	Scanner scan;
 	
 	public BlackJackService() {
 		this.shapeList = new ArrayList<ShapeVO>();
 		this.numList = new ArrayList<NumVO>();
 		this.cards = new ArrayList<Card2>();
-		this.player = player;
-		this.dealer = dealer;
 		scan = new Scanner(System.in);
 	}
 	
@@ -71,27 +68,43 @@ public class BlackJackService {
 		for(ShapeVO sv : shapeList) {
 			for(NumVO nv : numList) {
 				// 모양이 들어있는 카드와, 숫자가 들어있는 카드를 서로 섞어준다.
-				this.cards.add(new Card2(sv,nv));
+				this.cards.add(new Card2(sv,nv)); //cards에 추가해주기
 			
 			}
 		}
 	}
 
 	// 만들어진 카드를 섞어주는 메서드
+	// 랜덤으로 카드를 섞고 한장의 카드를 선택하기 위해 만들었음.
+	// 카드가 tmpcard에 들어가서 그 안에서 카드가 섞일것 그리고 셋팅한다
+
 	public void shuffle() {
 		List<Card2> tmpCard = new ArrayList<Card2>();
 		Random random = new Random();
+		// 랜덤 숫자를 만들기 위해 random사용
 		int randomCard = 0;
-		int originalSize = this.cards.size();
+		int originalSize = this.cards.size(); 
+		// 만약 카드가 얻는게 적어진다면 더이상 일하지 않을것이다
+		// originalSize변수에 cards에 들어있는 값을 넣어주고
 		for(int i =0 ; i <originalSize; i++) {
+			// 그만큼 for문으로 돌려서 randomCard 넘버를 만들어서 
+			// 0부터 51까지 근데 오리지널카드에서 삭제를 해야하기때문에
+			
+			// 최종적으로 original deck은 비게 될 것이고 temCard에는 가득차게 될 것
+			// rand.nextInt((max-min)+1)min
 			randomCard = random.nextInt((this.cards.size()-1-0) +1) +0;
+			// originalSize에서 꺼내오기 randomcard를
+			// 그리고 tmpCard에 저장.
 			tmpCard.add(this.cards.get(randomCard));
+			// 그리고 randomCard를 삭제해준다.
 			this.cards.remove(randomCard);
 			
 		}
-		this.cards = tmpCard;
+		this.cards = tmpCard; // cards에 tmpDeck 저장
+		// tmpcard에는 랜덤의 카드들이 들어가있고 그 카드들이 다시 cards에 들어가잇다.
 
 	}
+	// sysout 출력해줄 메서드
 	public String toString() {
 		String cardListOutPut = "";
 		for(Card2 aCard : this.cards) {
@@ -99,26 +112,36 @@ public class BlackJackService {
 		}
 		return cardListOutPut;
 	}
+	// 카드 삭제 메서드
 	public void removeCard(int i) {
 		this.cards.remove(i);
 		
 	}
+	
+	
+	// 처리가 필요할때 사용할 것.
+	
 	public Card2 getCard(int i) {
 		return this.cards.get(i);
 	}
 	public void addCard(Card2 addCard) {
 		// TODO Auto-generated method stub
 	this.cards.add(addCard);	
-	}
+	} //cards에 Card2 추가
 	
-	public void draw(Deck comingForm) {
+	public void draw(BlackJackService comingForm) {
 		this.cards.add(comingForm.getCard(0));
+		// blackjackservice에 첫번째값 가져오기.
+		// 후에 카드를 더 추가할때 만약 카드가 끝나면 그때 List끝에 메서드에 추가할때 사용할 수 있다. 
 		comingForm.removeCard(0);
 	}
+	// Decksize 리턴해주기.
 	public int deckSize() {
+		
 		return this.cards.size();
 	}
-	public void moveAllToDeck(Deck moveTO) {
+	
+	public void moveAllToDeck(BlackJackService moveTO) {
 		int thisDeckSize = this.cards.size();
 		
 		// put cards into moveTO deck
@@ -129,39 +152,20 @@ public class BlackJackService {
 			this.removeCard(0);
 		}
 	}
+	// totalvalue 값 리턴해주기
 	public int cardsValue() {
 		int totalValue =0;
 		int aces = 0;
 		
-		
-		NumVO vo = new NumVO();
-		for(int i =0; i< vo.getACE(); i++) {
-			if(totalValue > 10 ) {
-				totalValue += 1 ;
+	
+		// ACE카드 값 때에 따라 매겨주기
+		for(int i =0; i<aces; i++) {
+			if(totalValue > 10) {
+				totalValue += 1;
 			}else {
 				totalValue +=11;
 			}
-
 		}
 		return totalValue;
+	}		
 	}
-	public void Betting() {
-		
-		int playerMoney = 10000;
-		while(playerMoney > 0) {
-			System.out.println("당신은" + playerMoney + "원이 있습니다."
-					+ "얼마를 배팅하시겠습니까?");
-			int playerBet = scan.nextInt();
-			if(playerBet > playerMoney) {
-				System.out.println("가지고 있는 돈보다 더 많이 배팅할 수 없습니다.");
-			break;
-			}
-			boolean endRound = false;
-			
-			
-		}
-		
-		
-		
-	}
-}
