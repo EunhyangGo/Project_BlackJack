@@ -119,8 +119,8 @@ public class BlackJackService {
 	}
 	
 	
-	// 처리가 필요할때 사용할 것.
 	
+	// 카드를 얻을때 사용하는 메서드
 	public Card2 getCard(int i) {
 		return this.cards.get(i);
 	}
@@ -131,7 +131,6 @@ public class BlackJackService {
 	
 	public void draw(BlackJackService comingForm) {
 		this.cards.add(comingForm.getCard(0));
-		// blackjackservice에 첫번째값 가져오기.
 		// 후에 카드를 더 추가할때 만약 카드가 끝나면 그때 List끝에 메서드에 추가할때 사용할 수 있다. 
 		comingForm.removeCard(0);
 	}
@@ -152,7 +151,7 @@ public class BlackJackService {
 			this.removeCard(0);
 		}
 	}
-	// totalvalue 값 리턴해주기
+	// 카드값 지정해주는 메서드
 	public int cardsValue() {
 		int totalValue =0;
 		int aces = 0;

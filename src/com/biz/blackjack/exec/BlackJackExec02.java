@@ -22,15 +22,7 @@ public class BlackJackExec02 {
 		BlackJackService player = new BlackJackService();
 		BlackJackService dealer = new BlackJackService();
 		
-		int playerMoney = 10000;
-		while(playerMoney > 0) {
-			System.out.println("당신은" + playerMoney + "원이 있습니다."
-					+ "얼마를 배팅하시겠습니까?");
-			int playerBet = scan.nextInt();
-			if(playerBet > playerMoney) {
-				System.out.println("가지고 있는 돈보다 더 많이 배팅할 수 없습니다.");
-			break;
-			}
+		while(true) {
 			boolean endRound = false;
 			
 			// player가 두개의 카드 갖기
@@ -63,7 +55,6 @@ public class BlackJackExec02 {
 					if(player.cardsValue()>21) {
 						System.out.println("당신은 카드를 더이상 받을 수 없습니다."
 								+ player.cardsValue());
-						playerMoney -= playerBet;
 						endRound = true;
 						
 						
@@ -78,7 +69,6 @@ public class BlackJackExec02 {
 			System.out.println("딜러가 소지하고 있는 카드는:" + dealer.toString() + "입니다");
 					if(dealer.cardsValue() > player.cardsValue() && endRound == false) {
 				System.out.println("딜러가 이겼습니다!");
-				playerMoney -= playerBet;
 				endRound = true;
 			}
 			// 딜러가 16,17일때
@@ -91,7 +81,7 @@ public class BlackJackExec02 {
 			System.out.println("딜러가 가지고 있는 카드는 " + dealer.cardsValue());
 			if((dealer.cardsValue()>21) && endRound == false) {
 				System.out.println("당신이 이겼습니다!");
-				playerMoney += playerBet;
+				
 				endRound = true;
 				
 			}
@@ -110,7 +100,6 @@ public class BlackJackExec02 {
 			dealer.moveAllToDeck(playingDeck);
 			System.out.println("게임이 끝났습니다.");
 		}
-		System.out.println("게임 끝! 가지고 있는 돈이 없습니다.");
 				
 		
 		
