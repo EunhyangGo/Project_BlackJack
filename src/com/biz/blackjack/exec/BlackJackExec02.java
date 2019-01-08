@@ -96,8 +96,7 @@ public class BlackJackExec02 {
 				endRound = true;
 			}
 			
-			player.moveAllToDeck(playingDeck);
-			dealer.moveAllToDeck(playingDeck);
+			
 			System.out.println("게임이 끝났습니다.");
 		}
 				

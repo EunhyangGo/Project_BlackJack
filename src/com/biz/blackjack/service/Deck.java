@@ -27,19 +27,29 @@ public class Deck {
 	}
 	public void shuffle() {
 		ArrayList<Card> tmpDeck = new ArrayList<Card>();
-		// use Random
+		// 랜덤 숫자를 만들기 위해 random사용
 		Random random = new Random();
 		int randomCardIndex = 0;
 		int originalSize = this.cards.size();
+		// 만약 카드가 얻는게 적어진다면 더이상 일하지 않을것이다
+		// originalSize변수에 cards에 들어있는 값을 넣어주고
 		for(int i = 0 ; i< originalSize; i++) {
-			//Generate Random Index rand.nextInt((max-min) +1) + min
+			// 그만큼 for문으로 돌려서 randomCard 넘버를 만들어서 
+			// 0부터 51까지 근데 오리지널카드에서 삭제를 해야하기때문에
+			// 최종적으로 original deck은 비게 될 것이고 temCard에는 가득차게 될 것
+			// rand.nextInt((max-min)+1)min
 			randomCardIndex = random.nextInt((this.cards.size()-1 -0) +1) +0;
 			tmpDeck.add(this.cards.get(randomCardIndex));
-			// remove from original deck
+
+			// originalSize에서 꺼내오기 randomcard를
+			// 그리고 tmpCard에 저장.
 			this.cards.remove(randomCardIndex);
+			// 그리고 randomCard를 삭제해준다.
 		}
 		this.cards = tmpDeck;
+		// tmpcard에는 랜덤의 카드들이 들어가있고 그 카드들이 다시 cards에 들어가잇다.
 	}
+	// sysout 출력해줄 메서드
 	public String toString() {
 		String cardListOutput = "";
 		for(Card aCard : this.cards) {
@@ -49,14 +59,16 @@ public class Deck {
 		return cardListOutput;
 	}
 
+	// 카드 삭제 메서드
 	public void removeCard(int i) {
 		this.cards.remove(i);
 	}
+	// 카드를 얻을때 사용하는 메서드
 	public Card getCard(int i) {
 		return this.cards.get(i);
 	}
 	public void addCard(Card addCard) {
-		this.cards.add(addCard);
+		this.cards.add(addCard);//cards에 Card2 추가
 	}
 	// Draws from the deck
 	public void draw(Deck comingForm) {
@@ -78,7 +90,8 @@ public class Deck {
 			this.removeCard(0);
 		}
 	}
-	// Return total value of cards in deck
+
+	// 카드값 지정해주는 메서드
 	public int cardsValue() {
 		int totalValue =0;
 		int aces = 0;

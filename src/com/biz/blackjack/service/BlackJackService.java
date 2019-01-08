@@ -140,17 +140,7 @@ public class BlackJackService {
 		return this.cards.size();
 	}
 	
-	public void moveAllToDeck(BlackJackService moveTO) {
-		int thisDeckSize = this.cards.size();
-		
-		// put cards into moveTO deck
-		for(int i = 0; i < thisDeckSize; i++) {
-			moveTO.addCard(this.getCard(i));
-		}
-		for(int i = 0; i<thisDeckSize; i++) {
-			this.removeCard(0);
-		}
-	}
+
 	// 카드값 지정해주는 메서드
 	public int cardsValue() {
 		int totalValue =0;
